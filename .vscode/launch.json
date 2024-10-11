@@ -1,0 +1,90 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Show help",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "args": ["-h"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "Show list",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "args": ["-l"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "Add room",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "args": ["-a", "tscliente", "87673222792", "SkM1WnJkdzc1c0JMSllnYTd6eTVBdz09"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "Open exist room",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "args": ["teamsport"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "Open room from data",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "args": ["88666406307"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "Open room from url",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "args": ["https://teravisiontech.zoom.us/j/87673222792?pwd=SkM1WnJkdzc1c0JMSllnYTd6eTVBdz09"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "C++ Debug (lldb)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/zoom",
+            "preLaunchTask": "Build C++ project",
+            "args": ["-l"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+    ]
+}
