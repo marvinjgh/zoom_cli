@@ -1,7 +1,7 @@
 CXX		  := clang++
 CXX_FLAGS := -Wall -Wextra -std=c++17 -g
 
-BIN		:= bin
+BIN		:= out
 SRC		:= src
 INCLUDE	:= include
 LIB		:= lib
