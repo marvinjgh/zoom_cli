@@ -13,7 +13,7 @@ EXECUTABLE	:= zoom
 all: $(BIN)/$(EXECUTABLE)
 
 run: clean all
-	./$(BIN)/$(EXECUTABLE) mansfield
+	./$(BIN)/$(EXECUTABLE) -l
 
 $(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
