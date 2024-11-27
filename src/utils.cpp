@@ -59,7 +59,7 @@ void printHelp()
 	std::cout << "-h | --help\t\t show this description" << std::endl;
 	std::cout << "-l | --list\t\t show the list of cenference room registers" << std::endl;
 	std::cout << "-a | --add\t\t add a new conference room register" << std::endl;
-	std::cout << "name\t\t the zoom conference room number, or name that is saved in the file ~/.zoom_rooms" << std::endl;
+	std::cout << "name\t\t the zoom conference room number, or name that is saved in the file ~/.zoom_meeting" << std::endl;
 	std::cout << "conf\t\t the zoom conference room number" << std::endl;
 	std::cout << "pwd\t\t password to enter in the conference room" << std::endl
 		<< std::endl;
