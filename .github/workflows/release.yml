@@ -59,16 +59,17 @@ jobs:
 
       - name: Prepare binaries
         run: |
-          mv artifacts/zoom-windows/zoom.exe artifacts/zoom-windows.exe
-          mv artifacts/zoom-macos/zoom artifacts/zoom-macos
-          mv artifacts/zoom-linux/zoom artifacts/zoom-linux
+          cd artifacts
+          zip zoom-windows.zip zoom-windows/zoom.exe
+          zip zoom-macos.zip zoom-macos/zoom
+          zip zoom-linux.zip zoom-linux/zoom
 
       - name: Create release
         run: |
           gh release create ${{ github.ref_name }} \
-            artifacts/zoom-windows.exe \
-            artifacts/zoom-macos \
-            artifacts/zoom-linux \
+            artifacts/zoom-windows.zip \
+            artifacts/zoom-macos.zip \
+            artifacts/zoom-linux.zip \
             --title "Release ${{ github.ref_name }}" \
             --generate-notes
         env:
