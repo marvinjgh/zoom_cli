@@ -18,4 +18,24 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET zoom PROPERTY CXX_STANDARD 20)
 endif()
 
-# TODO: Add tests and install targets if needed.
+# Tests
+include(FetchContent)
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.7.1
+)
+FetchContent_MakeAvailable(Catch2)
+
+add_executable(zoom_tests
+  "tests/test_main.cpp"
+  "src/utils.cpp"
+  "src/meeting.cpp"
+)
+target_include_directories(zoom_tests PRIVATE src)
+target_link_libraries(zoom_tests PRIVATE Catch2::Catch2WithMain)
+set_property(TARGET zoom_tests PROPERTY CXX_STANDARD 20)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(zoom_tests)
