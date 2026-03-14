@@ -14,10 +14,10 @@ This proyect use CMake.
 
 ### macOX
 
-``` sh
+```sh
 # create folder 'out' and go
 mkdir our && cd out
- 
+
 # create build config files
 cmake ..
 
@@ -27,9 +27,4 @@ make
 
 ### Windows
 
-On Windows I use Visual Studio 2022.  
-
-## TODO
-
-- [ ] Add linux configuration
-- [ ] Add delete room
+On Windows I use Visual Studio 2022.

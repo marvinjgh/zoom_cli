@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            preset: x64-release
+            artifact: zoom.exe
+          - os: macos-latest
+            preset: macos-release
+            artifact: zoom
+          - os: ubuntu-latest
+            preset: linux-release
+            artifact: zoom
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up MSVC
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+
+      - name: Build
+        run: cmake --build out/build/${{ matrix.preset }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zoom-${{ matrix.os }}
+          path: out/build/${{ matrix.preset }}/${{ matrix.artifact }}
