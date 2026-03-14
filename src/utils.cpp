@@ -17,7 +17,7 @@ std::string createZoomCL(const std::string& conf, const std::string& pwd) {
 	ss << "open \"zoommtg://zoom.us/join?confno=";
 #elif defined(__linux__)
 	// TODO: Implement for Linux
-	ss << "xdg-open \"zoommtg://zoom.us/join?confno="
+	ss << "xdg-open \"zoommtg://zoom.us/join?confno=";
 #endif
 
 	ss << conf;
@@ -41,7 +41,7 @@ std::string extractRoom(const std::string& url) {
 		url2 = url2.substr(pos + 3);
 		pos = url2.find("pwd=");
 		if (pos != std::string::npos) {
-			conf = url2.substr(0, pos);
+			conf = url2.substr(0, pos-1);
 			pwd = url2.substr(pos + 4);
 		}
 		else {
@@ -53,12 +53,13 @@ std::string extractRoom(const std::string& url) {
 
 void printHelp()
 {
-	std::cout << "usage: zoom [-h | --help] [-l | --list] [(-a|--add) <name> <conf> [pwd]] [<conf> [pwd]] [name]" << std::endl
+	std::cout << "usage: zoom [-h | --help] [-l | --list] [(-a|--add) <name> (<conf> [pwd] | <url>)] [(-d|--delete) <name>] [<conf> [pwd]] [name]" << std::endl
 		<< std::endl;
 	std::cout << "Options:" << std::endl;
 	std::cout << "-h | --help\t\t show this description" << std::endl;
 	std::cout << "-l | --list\t\t show the list of cenference room registers" << std::endl;
 	std::cout << "-a | --add\t\t add a new conference room register" << std::endl;
+	std::cout << "-d | --delete\t\t delete a conference room register" << std::endl;
 	std::cout << "name\t\t the zoom conference room number, or name that is saved in the file ~/.zoom_meeting" << std::endl;
 	std::cout << "conf\t\t the zoom conference room number" << std::endl;
 	std::cout << "pwd\t\t password to enter in the conference room" << std::endl
