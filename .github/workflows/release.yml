@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            preset: x64-release
+            artifact: zoom.exe
+            artifact-name: zoom-windows
+          - os: macos-latest
+            preset: macos-release
+            artifact: zoom
+            artifact-name: zoom-macos
+          - os: ubuntu-latest
+            preset: linux-release
+            artifact: zoom
+            artifact-name: zoom-linux
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up MSVC
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+
+      - name: Build
+        run: cmake --build out/build/${{ matrix.preset }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: out/build/${{ matrix.preset }}/${{ matrix.artifact }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: false
+
+      - name: Prepare binaries
+        run: |
+          mv artifacts/zoom-windows/zoom.exe artifacts/zoom-windows.exe
+          mv artifacts/zoom-macos/zoom artifacts/zoom-macos
+          mv artifacts/zoom-linux/zoom artifacts/zoom-linux
+
+      - name: Create release
+        run: |
+          gh release create ${{ github.ref_name }} \
+            artifacts/zoom-windows.exe \
+            artifacts/zoom-macos \
+            artifacts/zoom-linux \
+            --title "Release ${{ github.ref_name }}" \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
